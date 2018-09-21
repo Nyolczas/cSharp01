@@ -25,6 +25,15 @@
                 <Label Content="Átlagos Reakció idő"/>
                 <Label Content="árx"/>
             </WrapPanel>
+            <Button Content="Igen" Grid.Row="2" Margin="5" Padding="10"
+                    HorizontalAlignment="Left"/>
+            <Button Content="Nem" Grid.Row="2" Margin="5" Padding="10"
+                    HorizontalAlignment="Center"/>
+            <Button Content="Kezdés" Grid.Row="2" Margin="5" Padding="10"
+                    HorizontalAlignment="Right"/>
         </Grid>
+        <ListBox Width="120">
+            
+        </ListBox>
     </Grid>
 </Window>
