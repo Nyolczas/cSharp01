@@ -53,7 +53,7 @@ namespace kartya01
 
             var dobas = dobokocka.Next(0, 5);
 
-            cardLeft.Icon = kartyapakli[dobas];
+            cardRight.Icon = kartyapakli[dobas];
         }
     }
 }
