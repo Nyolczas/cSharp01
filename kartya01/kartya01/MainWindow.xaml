@@ -23,9 +23,12 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <fa:ImageAwesome Icon="None" 
+                <fa:ImageAwesome x:Name="cardLeft" 
+                                 Icon="None" 
                                  Margin="50"/>
-                <fa:ImageAwesome Grid.Column="1" Icon="Microchip" 
+                <fa:ImageAwesome Grid.Column="1"
+                                 x:Name="cardRight"
+                                 Icon="None"
                                  Margin="50"/>
             </Grid>
 

@@ -29,11 +29,31 @@ namespace kartya01
         private void ButtonYes_Click(object sender, RoutedEventArgs e)
         {
             Debug.WriteLine("Igen gombot nyomtunk.");
+            UjKartyaHuzasa();
         }
 
         private void ButtonNo_Click(object sender, RoutedEventArgs e)
         {
             Debug.WriteLine("Nem gombot nyomtunk.");
+            UjKartyaHuzasa();
+        }
+
+        private void UjKartyaHuzasa()
+        {
+            var kartyapakli = new FontAwesome.WPF.FontAwesomeIcon[6];
+
+            kartyapakli[0] = FontAwesome.WPF.FontAwesomeIcon.Info;
+            kartyapakli[1] = FontAwesome.WPF.FontAwesomeIcon.Random;
+            kartyapakli[2] = FontAwesome.WPF.FontAwesomeIcon.Rocket;
+            kartyapakli[3] = FontAwesome.WPF.FontAwesomeIcon.Ship;
+            kartyapakli[4] = FontAwesome.WPF.FontAwesomeIcon.Star;
+            kartyapakli[5] = FontAwesome.WPF.FontAwesomeIcon.Tree;
+
+            var dobokocka = new Random();
+
+            var dobas = dobokocka.Next(0, 5);
+
+            cardLeft.Icon = kartyapakli[dobas];
         }
     }
 }
