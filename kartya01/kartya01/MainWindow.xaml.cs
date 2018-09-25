@@ -24,19 +24,12 @@ namespace kartya01
         public MainWindow()
         {
             InitializeComponent();
+            UjKartyaHuzasa();
+            ButtonYes.IsEnabled = false;
+            ButtonNo.IsEnabled = false;
         }
 
-        private void ButtonYes_Click(object sender, RoutedEventArgs e)
-        {
-            Debug.WriteLine("Igen gombot nyomtunk.");
-            UjKartyaHuzasa();
-        }
 
-        private void ButtonNo_Click(object sender, RoutedEventArgs e)
-        {
-            Debug.WriteLine("Nem gombot nyomtunk.");
-            UjKartyaHuzasa();
-        }
 
         private void UjKartyaHuzasa()
         {
@@ -54,6 +47,27 @@ namespace kartya01
             var dobas = dobokocka.Next(0, 5);
 
             cardRight.Icon = kartyapakli[dobas];
+        }
+
+        private void ButtonYes_Click(object sender, RoutedEventArgs e)
+        {
+            Debug.WriteLine("Igen gombot nyomtunk.");
+            UjKartyaHuzasa();
+        }
+
+        private void ButtonNo_Click(object sender, RoutedEventArgs e)
+        {
+            Debug.WriteLine("Nem gombot nyomtunk.");
+            UjKartyaHuzasa();
+        }
+
+        private void ButtonStart_Click(object sender, RoutedEventArgs e)
+        {
+            Debug.WriteLine("Start gombot nyomtunk.");
+            UjKartyaHuzasa();
+            ButtonYes.IsEnabled = true;
+            ButtonNo.IsEnabled = true ; 
+            ButtonStart.IsEnabled = false; 
         }
     }
 }
