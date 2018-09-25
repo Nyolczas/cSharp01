@@ -45,9 +45,9 @@ namespace kartya01
             kartyapakli[0] = FontAwesome.WPF.FontAwesomeIcon.Info;
             kartyapakli[1] = FontAwesome.WPF.FontAwesomeIcon.Random;
             kartyapakli[2] = FontAwesome.WPF.FontAwesomeIcon.Rocket;
-            kartyapakli[3] = FontAwesome.WPF.FontAwesomeIcon.Ship;
+            kartyapakli[3] = FontAwesome.WPF.FontAwesomeIcon.Dollar;
             kartyapakli[4] = FontAwesome.WPF.FontAwesomeIcon.Star;
-            kartyapakli[5] = FontAwesome.WPF.FontAwesomeIcon.Tree;
+            kartyapakli[5] = FontAwesome.WPF.FontAwesomeIcon.Female;
 
             var dobokocka = new Random();
 
