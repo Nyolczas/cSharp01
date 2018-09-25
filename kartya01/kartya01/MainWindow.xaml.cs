@@ -62,11 +62,13 @@ namespace kartya01
             {
                 Debug.WriteLine("A válasz helyes.");
                 cardLeft.Icon = FontAwesomeIcon.Check;
+                cardLeft.Foreground = Brushes.LimeGreen;
             }
             else
             {
                 Debug.WriteLine("Helytelen válasz!");
                 cardLeft.Icon = FontAwesomeIcon.Times;
+                cardLeft.Foreground = Brushes.Red;
             }
         }
 
@@ -78,11 +80,13 @@ namespace kartya01
             {
                 Debug.WriteLine("A válasz helyes.");
                 cardLeft.Icon = FontAwesomeIcon.Check;
+                cardLeft.Foreground = Brushes.LimeGreen;
             }
             else
             {
                 Debug.WriteLine("Helytelen válasz!");
                 cardLeft.Icon = FontAwesomeIcon.Times;
+                cardLeft.Foreground = Brushes.Red;
             }
         }
 
