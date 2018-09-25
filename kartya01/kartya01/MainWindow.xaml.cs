@@ -36,14 +36,14 @@ namespace kartya01
 
         private void UjKartyaHuzasa()
         {
-            var kartyapakli = new FontAwesome.WPF.FontAwesomeIcon[6];
+            var kartyapakli = new FontAwesomeIcon[6];
 
-            kartyapakli[0] = FontAwesome.WPF.FontAwesomeIcon.Info;
-            kartyapakli[1] = FontAwesome.WPF.FontAwesomeIcon.Random;
-            kartyapakli[2] = FontAwesome.WPF.FontAwesomeIcon.Rocket;
-            kartyapakli[3] = FontAwesome.WPF.FontAwesomeIcon.Dollar;
-            kartyapakli[4] = FontAwesome.WPF.FontAwesomeIcon.Star;
-            kartyapakli[5] = FontAwesome.WPF.FontAwesomeIcon.Female;
+            kartyapakli[0] = FontAwesomeIcon.Info;
+            kartyapakli[1] = FontAwesomeIcon.Random;
+            kartyapakli[2] = FontAwesomeIcon.Rocket;
+            kartyapakli[3] = FontAwesomeIcon.Dollar;
+            kartyapakli[4] = FontAwesomeIcon.Star;
+            kartyapakli[5] = FontAwesomeIcon.Female;
 
             var dobokocka = new Random();
 
@@ -61,10 +61,12 @@ namespace kartya01
             if (elozoKartya==cardRight.Icon)
             {
                 Debug.WriteLine("A válasz helyes.");
+                cardLeft.Icon = FontAwesomeIcon.Check;
             }
             else
             {
                 Debug.WriteLine("Helytelen válasz!");
+                cardLeft.Icon = FontAwesomeIcon.Times;
             }
         }
 
@@ -72,6 +74,16 @@ namespace kartya01
         {
             Debug.WriteLine("Nem gombot nyomtunk.");
             UjKartyaHuzasa();
+            if (elozoKartya != cardRight.Icon)
+            {
+                Debug.WriteLine("A válasz helyes.");
+                cardLeft.Icon = FontAwesomeIcon.Check;
+            }
+            else
+            {
+                Debug.WriteLine("Helytelen válasz!");
+                cardLeft.Icon = FontAwesomeIcon.Times;
+            }
         }
 
         private void ButtonStart_Click(object sender, RoutedEventArgs e)
