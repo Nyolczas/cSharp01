@@ -60,15 +60,11 @@ namespace kartya01
             UjKartyaHuzasa();
             if (elozoKartya==cardRight.Icon)
             {
-                Debug.WriteLine("A válasz helyes.");
-                cardLeft.Icon = FontAwesomeIcon.Check;
-                cardLeft.Foreground = Brushes.LimeGreen;
+                JoValasz();
             }
             else
             {
-                Debug.WriteLine("Helytelen válasz!");
-                cardLeft.Icon = FontAwesomeIcon.Times;
-                cardLeft.Foreground = Brushes.Red;
+                RosszValasz();
             }
         }
 
@@ -78,15 +74,11 @@ namespace kartya01
             UjKartyaHuzasa();
             if (elozoKartya != cardRight.Icon)
             {
-                Debug.WriteLine("A válasz helyes.");
-                cardLeft.Icon = FontAwesomeIcon.Check;
-                cardLeft.Foreground = Brushes.LimeGreen;
+                JoValasz();
             }
             else
             {
-                Debug.WriteLine("Helytelen válasz!");
-                cardLeft.Icon = FontAwesomeIcon.Times;
-                cardLeft.Foreground = Brushes.Red;
+                RosszValasz();
             }
         }
 
@@ -97,6 +89,20 @@ namespace kartya01
             ButtonYes.IsEnabled = true;
             ButtonNo.IsEnabled = true ; 
             ButtonStart.IsEnabled = false; 
+        }
+
+        private void RosszValasz()
+        {
+            Debug.WriteLine("Helytelen válasz!");
+            cardLeft.Icon = FontAwesomeIcon.Times;
+            cardLeft.Foreground = Brushes.Red;
+        }
+
+        private void JoValasz()
+        {
+            Debug.WriteLine("A válasz helyes.");
+            cardLeft.Icon = FontAwesomeIcon.Check;
+            cardLeft.Foreground = Brushes.LimeGreen;
         }
     }
 }
