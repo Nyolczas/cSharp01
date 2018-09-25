@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using FontAwesome.WPF;
 
 namespace kartya01
 {
@@ -21,6 +22,8 @@ namespace kartya01
     /// </summary>
     public partial class MainWindow : Window
     {
+        private FontAwesomeIcon elozoKartya;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -46,6 +49,8 @@ namespace kartya01
 
             var dobas = dobokocka.Next(0, 5);
 
+            elozoKartya = cardRight.Icon;
+
             cardRight.Icon = kartyapakli[dobas];
         }
 
@@ -53,6 +58,14 @@ namespace kartya01
         {
             Debug.WriteLine("Igen gombot nyomtunk.");
             UjKartyaHuzasa();
+            if (elozoKartya==cardRight.Icon)
+            {
+                Debug.WriteLine("A válasz helyes.");
+            }
+            else
+            {
+                Debug.WriteLine("Helytelen válasz!");
+            }
         }
 
         private void ButtonNo_Click(object sender, RoutedEventArgs e)
