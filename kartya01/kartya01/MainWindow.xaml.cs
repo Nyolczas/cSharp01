@@ -10,6 +10,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
@@ -58,7 +59,7 @@ namespace kartya01
         {
             Debug.WriteLine("Igen gombot nyomtunk.");
             UjKartyaHuzasa();
-            if (elozoKartya==cardRight.Icon)
+            if (elozoKartya == cardRight.Icon)
             {
                 JoValasz();
             }
@@ -87,8 +88,8 @@ namespace kartya01
             Debug.WriteLine("Start gombot nyomtunk.");
             UjKartyaHuzasa();
             ButtonYes.IsEnabled = true;
-            ButtonNo.IsEnabled = true ; 
-            ButtonStart.IsEnabled = false; 
+            ButtonNo.IsEnabled = true;
+            ButtonStart.IsEnabled = false;
         }
 
         private void RosszValasz()
@@ -96,6 +97,7 @@ namespace kartya01
             Debug.WriteLine("Helytelen válasz!");
             cardLeft.Icon = FontAwesomeIcon.Times;
             cardLeft.Foreground = Brushes.Red;
+            VisszajelzesEltuntetese();
         }
 
         private void JoValasz()
@@ -103,6 +105,19 @@ namespace kartya01
             Debug.WriteLine("A válasz helyes.");
             cardLeft.Icon = FontAwesomeIcon.Check;
             cardLeft.Foreground = Brushes.LimeGreen;
+            VisszajelzesEltuntetese();
+        }
+
+        private void VisszajelzesEltuntetese()
+        {
+            // kártya eltüntetése animációval
+            var animationOut = new DoubleAnimation(1, 0, TimeSpan.FromMilliseconds(1000));
+            cardLeft.BeginAnimation(OpacityProperty, animationOut);
+        }
+
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            Debug.WriteLine(e.Key);
         }
     }
 }
