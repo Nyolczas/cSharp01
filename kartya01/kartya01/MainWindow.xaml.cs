@@ -66,10 +66,25 @@ namespace kartya01
 
         }
 
+        private void ButtonStart_Click(object sender, RoutedEventArgs e)
+        {
+            StartGame();
+        }
+
         private void ButtonYes_Click(object sender, RoutedEventArgs e)
         {
+            AnsverYes();
+        }
+
+        private void ButtonNo_Click(object sender, RoutedEventArgs e)
+        {
+            AnsverNo();
+        }
+
+        private void AnsverYes()
+        {
             Debug.WriteLine("Igen gombot nyomtunk.");
-           
+
             if (elozoKartya == cardRight.Icon)
             {
                 JoValasz();
@@ -81,11 +96,11 @@ namespace kartya01
 
             UjKartyaHuzasa();
         }
-
-        private void ButtonNo_Click(object sender, RoutedEventArgs e)
+        
+        private void AnsverNo()
         {
             Debug.WriteLine("Nem gombot nyomtunk.");
-            
+
             if (elozoKartya != cardRight.Icon)
             {
                 JoValasz();
@@ -98,7 +113,8 @@ namespace kartya01
             UjKartyaHuzasa();
         }
 
-        private void ButtonStart_Click(object sender, RoutedEventArgs e)
+
+        private void StartGame()
         {
             Debug.WriteLine("Start gombot nyomtunk.");
             UjKartyaHuzasa();
@@ -133,6 +149,20 @@ namespace kartya01
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
             Debug.WriteLine(e.Key);
+            if(e.Key==Key.Up)
+            {
+                StartGame();
+            }
+
+            if(e.Key==Key.Right)
+            {
+                AnsverNo();
+            }
+
+            if(e.Key==Key.Left)
+            {
+                AnsverYes();
+            }
         }
     }
 }
