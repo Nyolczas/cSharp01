@@ -52,13 +52,24 @@ namespace kartya01
 
             elozoKartya = cardRight.Icon;
 
+            // eltüntetni az előző kártyát
+
+            var animOut = new DoubleAnimation(1, 0, TimeSpan.FromMilliseconds(100));
+            cardRight.BeginAnimation(OpacityProperty, animOut);
+
             cardRight.Icon = kartyapakli[dobas];
+
+            // megjeleníteni az új kártyát
+
+            var animIn = new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(100));
+            cardRight.BeginAnimation(OpacityProperty, animIn);
+
         }
 
         private void ButtonYes_Click(object sender, RoutedEventArgs e)
         {
             Debug.WriteLine("Igen gombot nyomtunk.");
-            UjKartyaHuzasa();
+           
             if (elozoKartya == cardRight.Icon)
             {
                 JoValasz();
@@ -67,12 +78,14 @@ namespace kartya01
             {
                 RosszValasz();
             }
+
+            UjKartyaHuzasa();
         }
 
         private void ButtonNo_Click(object sender, RoutedEventArgs e)
         {
             Debug.WriteLine("Nem gombot nyomtunk.");
-            UjKartyaHuzasa();
+            
             if (elozoKartya != cardRight.Icon)
             {
                 JoValasz();
@@ -81,6 +94,8 @@ namespace kartya01
             {
                 RosszValasz();
             }
+
+            UjKartyaHuzasa();
         }
 
         private void ButtonStart_Click(object sender, RoutedEventArgs e)
