@@ -24,13 +24,15 @@ namespace kartya01
     public partial class MainWindow : Window
     {
         private FontAwesomeIcon elozoKartya;
+        private int Score;
 
         public MainWindow()
         {
             InitializeComponent();
             UjKartyaHuzasa();
-            ButtonYes.IsEnabled = false;
+            ButtonYes.IsEnabled = false; 
             ButtonNo.IsEnabled = false;
+            Score = 0;
         }
 
 
@@ -128,6 +130,7 @@ namespace kartya01
             Debug.WriteLine("Helytelen válasz!");
             cardLeft.Icon = FontAwesomeIcon.Times;
             cardLeft.Foreground = Brushes.Red;
+            Scoring(false);
             VisszajelzesEltuntetese();
         }
 
@@ -137,7 +140,23 @@ namespace kartya01
             cardLeft.Icon = FontAwesomeIcon.Check;
             cardLeft.Foreground = Brushes.LimeGreen;
             VisszajelzesEltuntetese();
+            Scoring(true);
         }
+
+        private void Scoring(bool isGoodAnsver)
+        {
+            if(isGoodAnsver)
+            {
+                Score += 100;
+            }
+            else
+            {
+                Score -= 100;
+            }
+            LabelScore.Content = Score;
+        }
+
+        
 
         private void VisszajelzesEltuntetese()
         {
