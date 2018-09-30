@@ -14,6 +14,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 using FontAwesome.WPF;
 
 namespace kartya01
@@ -24,7 +25,8 @@ namespace kartya01
     public partial class MainWindow : Window
     {
         private FontAwesomeIcon elozoKartya;
-        private int Score;
+        private int score;
+        private DispatcherTimer pendulumClock;
 
         public MainWindow()
         {
@@ -32,10 +34,18 @@ namespace kartya01
             UjKartyaHuzasa();
             ButtonYes.IsEnabled = false; 
             ButtonNo.IsEnabled = false;
-            Score = 0;
+            score = 0;
+
+            pendulumClock = new DispatcherTimer(TimeSpan.FromSeconds(1),
+                                                DispatcherPriority.Normal,
+                                                clockShock,
+                                                Application.Current.Dispatcher);
         }
 
-
+        private void clockShock(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
 
         private void UjKartyaHuzasa()
         {
@@ -147,13 +157,13 @@ namespace kartya01
         {
             if(isGoodAnsver)
             {
-                Score += 100;
+                score += 100;
             }
             else
             {
-                Score -= 100;
+                score -= 100;
             }
-            LabelScore.Content = Score;
+            LabelScore.Content = score;
         }
 
         
