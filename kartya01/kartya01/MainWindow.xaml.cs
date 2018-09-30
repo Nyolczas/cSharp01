@@ -41,6 +41,7 @@ namespace kartya01
                                                 DispatcherPriority.Normal,
                                                 clockShock,
                                                 Application.Current.Dispatcher);
+            pendulumClock.Stop();
 
             UjKartyaHuzasa();
         }
@@ -48,7 +49,7 @@ namespace kartya01
         private void clockShock(object sender, EventArgs e)
         {
             playTime += TimeSpan.FromSeconds(1);
-            LabelPlayTime.Content = playTime;
+            LabelPlayTime.Content = $"{playTime.Minutes:00}:{playTime.Seconds:00}";
         }
 
         private void UjKartyaHuzasa()
@@ -137,6 +138,7 @@ namespace kartya01
             ButtonYes.IsEnabled = true;
             ButtonNo.IsEnabled = true;
             ButtonStart.IsEnabled = false;
+            pendulumClock.Start();
         }
 
         private void RosszValasz()
