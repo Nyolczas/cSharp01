@@ -27,24 +27,28 @@ namespace kartya01
         private FontAwesomeIcon elozoKartya;
         private int score;
         private DispatcherTimer pendulumClock;
+        private TimeSpan playTime;
 
         public MainWindow()
         {
             InitializeComponent();
-            UjKartyaHuzasa();
+            
             ButtonYes.IsEnabled = false; 
             ButtonNo.IsEnabled = false;
             score = 0;
-
+            playTime = TimeSpan.FromSeconds(0);
             pendulumClock = new DispatcherTimer(TimeSpan.FromSeconds(1),
                                                 DispatcherPriority.Normal,
                                                 clockShock,
                                                 Application.Current.Dispatcher);
+
+            UjKartyaHuzasa();
         }
 
         private void clockShock(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            playTime += TimeSpan.FromSeconds(1);
+            LabelPlayTime.Content = playTime;
         }
 
         private void UjKartyaHuzasa()
