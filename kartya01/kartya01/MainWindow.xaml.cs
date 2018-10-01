@@ -175,7 +175,7 @@ namespace kartya01
             }
             LabelScore.Content = score;
 
-            LabelReactionTime.Content = stopwatch.ElapsedMilliseconds;
+            LabelReactionTime.Content = $"{stopwatch.ElapsedMilliseconds} / {0}";
         }
 
         
