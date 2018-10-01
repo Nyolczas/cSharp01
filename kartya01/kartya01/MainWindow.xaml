@@ -40,7 +40,7 @@
                 <Label Content="px"
                        x:Name="LabelScore"/>
                 <Label Content="Reakció idő"/>
-                <Label Content="rx"/>
+                <Label x:Name="LabelReactionTime" Content="rx"/>
                 <Label Content="Átlagos Reakció idő"/>
                 <Label Content="árx"/>
             </WrapPanel>

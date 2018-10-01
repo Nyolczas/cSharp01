@@ -28,6 +28,7 @@ namespace kartya01
         private int score;
         private DispatcherTimer pendulumClock;
         private TimeSpan playTime;
+        private Stopwatch stopwatch;
 
         public MainWindow()
         {
@@ -43,6 +44,7 @@ namespace kartya01
                                                 Application.Current.Dispatcher);
             pendulumClock.Stop();
 
+            stopwatch = new Stopwatch();
             UjKartyaHuzasa();
         }
 
@@ -80,6 +82,8 @@ namespace kartya01
 
             var animIn = new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(100));
             cardRight.BeginAnimation(OpacityProperty, animIn);
+
+            stopwatch.Restart();
 
         }
 
@@ -170,6 +174,8 @@ namespace kartya01
                 score -= 100;
             }
             LabelScore.Content = score;
+
+            LabelReactionTime.Content = stopwatch.ElapsedMilliseconds;
         }
 
         
