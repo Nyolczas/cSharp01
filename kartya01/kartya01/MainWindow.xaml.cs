@@ -29,6 +29,7 @@ namespace kartya01
         private DispatcherTimer pendulumClock;
         private TimeSpan playTime;
         private Stopwatch stopwatch;
+        private List<long> listReactionTimes;
 
         public MainWindow()
         {
@@ -45,6 +46,9 @@ namespace kartya01
             pendulumClock.Stop();
 
             stopwatch = new Stopwatch();
+
+            listReactionTimes = new List<long>();
+
             UjKartyaHuzasa();
         }
 
@@ -175,7 +179,11 @@ namespace kartya01
             }
             LabelScore.Content = score;
 
-            LabelReactionTime.Content = $"{stopwatch.ElapsedMilliseconds} / {0}";
+            stopwatch.Stop();
+
+            listReactionTimes.Add(stopwatch.ElapsedMilliseconds);
+
+            LabelReactionTime.Content = $"{listReactionTimes.Last()} / {listReactionTimes.Average()}";
         }
 
         
