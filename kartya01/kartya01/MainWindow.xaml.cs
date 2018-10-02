@@ -25,7 +25,7 @@ namespace kartya01
     public partial class MainWindow : Window
     {
         private FontAwesomeIcon elozoKartya;
-        private int score;
+        private long score;
         private DispatcherTimer pendulumClock;
         private TimeSpan playTime;
         private Stopwatch stopwatch;
@@ -171,21 +171,24 @@ namespace kartya01
 
         private void Scoring(bool isGoodAnsver)
         {
-            if(isGoodAnsver)
-            {
-                score += 100;
-            }
-            else
-            {
-                score -= 100;
-            }
-            LabelScore.Content = score;
-
-            stopwatch.Stop();
+            //stopwatch.Stop();
 
             listReactionTimes.Add(stopwatch.ElapsedMilliseconds);
 
             LabelReactionTime.Content = $"{listReactionTimes.Last()} / {(long)listReactionTimes.Average()}";
+
+            if (isGoodAnsver)
+            {
+                Debug.WriteLine($"hozzáadott ponszám: {10000 / listReactionTimes.Last()}");
+                score = score + 10000 / listReactionTimes.Last();
+            }
+            else
+            {
+                Debug.WriteLine($"levont ponszám: {100 * (listReactionTimes.Last() / 1000)}");
+                score = score - 100 * (listReactionTimes.Last() / 1000);
+            }
+
+            LabelScore.Content = score;
         }
 
         
