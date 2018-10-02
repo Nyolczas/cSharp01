@@ -183,7 +183,7 @@ namespace kartya01
 
             listReactionTimes.Add(stopwatch.ElapsedMilliseconds);
 
-            LabelReactionTime.Content = $"{listReactionTimes.Last()} / {listReactionTimes.Average()}";
+            LabelReactionTime.Content = $"{listReactionTimes.Last()} / {(long)listReactionTimes.Average()}";
         }
 
         
