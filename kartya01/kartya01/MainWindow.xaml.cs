@@ -30,6 +30,8 @@ namespace kartya01
         private TimeSpan playTime;
         private Stopwatch stopwatch;
         private List<long> listReactionTimes;
+        private Random dobokocka;
+        private FontAwesomeIcon[] kartyapakli;
 
         public MainWindow()
         {
@@ -49,6 +51,17 @@ namespace kartya01
 
             listReactionTimes = new List<long>();
 
+            kartyapakli = new FontAwesomeIcon[6];
+
+            kartyapakli[0] = FontAwesomeIcon.Info;
+            kartyapakli[1] = FontAwesomeIcon.Random;
+            kartyapakli[2] = FontAwesomeIcon.Rocket;
+            kartyapakli[3] = FontAwesomeIcon.Dollar;
+            kartyapakli[4] = FontAwesomeIcon.Star;
+            kartyapakli[5] = FontAwesomeIcon.Female;
+
+            dobokocka = new Random();
+
             UjKartyaHuzasa();
         }
 
@@ -60,17 +73,6 @@ namespace kartya01
 
         private void UjKartyaHuzasa()
         {
-            var kartyapakli = new FontAwesomeIcon[6];
-
-            kartyapakli[0] = FontAwesomeIcon.Info;
-            kartyapakli[1] = FontAwesomeIcon.Random;
-            kartyapakli[2] = FontAwesomeIcon.Rocket;
-            kartyapakli[3] = FontAwesomeIcon.Dollar;
-            kartyapakli[4] = FontAwesomeIcon.Star;
-            kartyapakli[5] = FontAwesomeIcon.Female;
-
-            var dobokocka = new Random();
-
             var dobas = dobokocka.Next(0, 5);
 
             elozoKartya = cardRight.Icon;
