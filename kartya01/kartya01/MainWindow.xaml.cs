@@ -69,9 +69,12 @@ namespace kartya01
             ButtonYes.IsEnabled = false;
             ButtonNo.IsEnabled = false;
             score = 0;
+            ShowScore();
             playTime = TimeSpan.FromSeconds(0);
+            ShowPlayTime();
             listReactionTimes = new List<long>();
-            UjKartyaHuzasa();
+            ShowReactonTimes(0,0);
+            UjKartyaHuzasa(); 
         }
 
         // játék végállapota
@@ -90,12 +93,17 @@ namespace kartya01
         private void clockShock(object sender, EventArgs e)
         {
             playTime += TimeSpan.FromSeconds(1);
-            LabelPlayTime.Content = $"{playTime.Minutes:00}:{playTime.Seconds:00}";
 
-            if(playTime > TimeSpan.FromSeconds(10))
+            if (playTime > TimeSpan.FromSeconds(10))
             {
                 FinalState();
             }
+            ShowPlayTime();
+        }
+
+        private void ShowPlayTime()
+        {
+            LabelPlayTime.Content = $"{playTime.Minutes:00}:{playTime.Seconds:00}";
         }
 
         private void UjKartyaHuzasa()
@@ -206,8 +214,7 @@ namespace kartya01
             //stopwatch.Stop();
 
             listReactionTimes.Add(stopwatch.ElapsedMilliseconds);
-
-            LabelReactionTime.Content = $"{listReactionTimes.Last()} / {(long)listReactionTimes.Average()}";
+            ShowReactonTimes(listReactionTimes.Last(), (long)listReactionTimes.Average());
 
             if (isGoodAnsver)
             {
@@ -220,6 +227,16 @@ namespace kartya01
                 score = score - 100 * (listReactionTimes.Last() / 1000);
             }
 
+            ShowScore();
+        }
+
+        private void ShowReactonTimes(long lastRactionTime, long averageReactionTime)
+        {
+            LabelReactionTime.Content = $"{lastRactionTime} / {averageReactionTime}";
+        }
+
+        private void ShowScore()
+        {
             LabelScore.Content = score;
         }
 
