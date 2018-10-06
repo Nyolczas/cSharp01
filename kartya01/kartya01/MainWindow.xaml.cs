@@ -36,11 +36,7 @@ namespace kartya01
         public MainWindow()
         {
             InitializeComponent();
-            
-            ButtonYes.IsEnabled = false; 
-            ButtonNo.IsEnabled = false;
-            score = 0;
-            playTime = TimeSpan.FromSeconds(0);
+
             pendulumClock = new DispatcherTimer(TimeSpan.FromSeconds(1),
                                                 DispatcherPriority.Normal,
                                                 clockShock,
@@ -48,8 +44,6 @@ namespace kartya01
             pendulumClock.Stop();
 
             stopwatch = new Stopwatch();
-
-            listReactionTimes = new List<long>();
 
             kartyapakli = new FontAwesomeIcon[6];
 
@@ -62,13 +56,46 @@ namespace kartya01
 
             dobokocka = new Random();
 
+            StartingState();
+        }
+
+        // játék mkezdőállapota
+        private void StartingState()
+        {
+            ButtonRestart.Visibility = Visibility.Hidden;
+            ButtonStart.Visibility = Visibility.Visible;
+
+            ButtonStart.IsEnabled = true;
+            ButtonYes.IsEnabled = false;
+            ButtonNo.IsEnabled = false;
+            score = 0;
+            playTime = TimeSpan.FromSeconds(0);
+            listReactionTimes = new List<long>();
             UjKartyaHuzasa();
+        }
+
+        // játék végállapota
+        private void FinalState()
+        {
+            pendulumClock.Stop();
+
+            ButtonYes.IsEnabled = false;
+            ButtonNo.IsEnabled = false;
+
+            ButtonRestart.Visibility = Visibility.Visible;
+            ButtonStart.Visibility = Visibility.Hidden;
+
         }
 
         private void clockShock(object sender, EventArgs e)
         {
             playTime += TimeSpan.FromSeconds(1);
             LabelPlayTime.Content = $"{playTime.Minutes:00}:{playTime.Seconds:00}";
+
+            if(playTime > TimeSpan.FromSeconds(10))
+            {
+                FinalState();
+            }
         }
 
         private void UjKartyaHuzasa()
@@ -96,6 +123,11 @@ namespace kartya01
         private void ButtonStart_Click(object sender, RoutedEventArgs e)
         {
             StartGame();
+        }
+
+        private void ButtonRestart_Click(object sender, RoutedEventArgs e)
+        {
+            StartingState();
         }
 
         private void ButtonYes_Click(object sender, RoutedEventArgs e)
@@ -191,8 +223,6 @@ namespace kartya01
             LabelScore.Content = score;
         }
 
-        
-
         private void VisszajelzesEltuntetese()
         {
             // kártya eltüntetése animációval
@@ -218,5 +248,6 @@ namespace kartya01
                 AnsverYes();
             }
         }
+
     }
 }
