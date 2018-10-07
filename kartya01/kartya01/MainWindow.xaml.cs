@@ -250,17 +250,28 @@ namespace kartya01
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
             Debug.WriteLine(e.Key);
-            if(e.Key==Key.Up)
+            if(ButtonStart.IsEnabled &&
+                ButtonStart.IsVisible &&
+                e.Key==Key.Up)
             {
                 StartGame();
             }
 
-            if(e.Key==Key.Right)
+            if (ButtonRestart.IsEnabled &&
+                ButtonRestart.IsVisible &&
+                e.Key == Key.Down)
+            {
+                StartingState();
+            }
+
+            if (ButtonNo.IsEnabled &&
+                e.Key==Key.Right)
             {
                 AnsverNo();
             }
 
-            if(e.Key==Key.Left)
+            if(ButtonYes.IsEnabled && 
+                e.Key==Key.Left)
             {
                 AnsverYes();
             }
