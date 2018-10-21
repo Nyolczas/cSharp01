@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -32,6 +33,7 @@ namespace kartya01
         private List<long> listReactionTimes;
         private Random dobokocka;
         private FontAwesomeIcon[] kartyapakli;
+        private List<long> listTop5Score;
 
         public MainWindow()
         {
@@ -57,6 +59,8 @@ namespace kartya01
             dobokocka = new Random();
 
             StartingState();
+
+            listTop5Score = new List<long>();
         }
 
         // játék mkezdőállapota
@@ -87,6 +91,16 @@ namespace kartya01
 
             ButtonRestart.Visibility = Visibility.Visible;
             ButtonStart.Visibility = Visibility.Hidden;
+
+            listTop5Score.Add(score);
+
+            if (listTop5Score.Count>5)
+            {
+                listTop5Score.Sort();
+                listTop5Score.RemoveAt(0);
+            }
+
+            ListBoxTop5.ItemsSource = new ObservableCollection<long>(listTop5Score.OrderByDescending(x => x));
 
         }
 
