@@ -70,7 +70,7 @@ namespace kartya01
             ButtonNo.IsEnabled = false;
             score = 0;
             ShowScore();
-            playTime = TimeSpan.FromSeconds(0);
+            playTime = TimeSpan.FromSeconds(10);
             ShowPlayTime();
             listReactionTimes = new List<long>();
             ShowReactonTimes(0,0);
@@ -92,9 +92,9 @@ namespace kartya01
 
         private void clockShock(object sender, EventArgs e)
         {
-            playTime += TimeSpan.FromSeconds(1);
+            playTime -= TimeSpan.FromSeconds(1);
 
-            if (playTime > TimeSpan.FromSeconds(10))
+            if (playTime == TimeSpan.FromSeconds(0))
             {
                 FinalState();
             }
