@@ -61,9 +61,24 @@ namespace kartya01
 
             dobokocka = new Random();
 
+            top5FileName = "toplista.txt";
+
             StartingState();
 
-            listTop5Score = new List<long>();
+            if (File.Exists(top5FileName))
+            {
+                var fs = new FileStream(top5FileName, FileMode.Open);
+                var szovegesito = new XmlSerializer(typeof(List<long>));
+
+                listTop5Score = (List<long>)szovegesito.Deserialize(fs);
+            }
+            else
+            {
+                listTop5Score = new List<long>();
+            }
+
+            ShowTop5Data();
+            
         }
 
         // játék mkezdőállapota
@@ -82,7 +97,7 @@ namespace kartya01
             listReactionTimes = new List<long>();
             ShowReactonTimes(0,0);
             UjKartyaHuzasa();
-            top5FileName = "toplista.txt";
+            
         }
 
         // játék végállapota
@@ -98,7 +113,7 @@ namespace kartya01
 
             listTop5Score.Add(score);
 
-            if (listTop5Score.Count>5)
+            if (listTop5Score.Count > 5)
             {
                 listTop5Score.Sort();
                 listTop5Score.RemoveAt(0);
@@ -108,9 +123,13 @@ namespace kartya01
             var fs = new FileStream(top5FileName, FileMode.Create);
             var szovegesito = new XmlSerializer(typeof(List<long>));
             szovegesito.Serialize(fs, listTop5Score);
+            ShowTop5Data();
 
+        }
+
+        private void ShowTop5Data()
+        {
             ListBoxTop5.ItemsSource = new ObservableCollection<long>(listTop5Score.OrderByDescending(x => x));
-
         }
 
         private void clockShock(object sender, EventArgs e)
