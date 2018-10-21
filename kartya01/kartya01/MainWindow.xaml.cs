@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,6 +17,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using System.Xml.Serialization;
 using FontAwesome.WPF;
 
 namespace kartya01
@@ -34,6 +36,7 @@ namespace kartya01
         private Random dobokocka;
         private FontAwesomeIcon[] kartyapakli;
         private List<long> listTop5Score;
+        private string top5FileName;
 
         public MainWindow()
         {
@@ -78,7 +81,8 @@ namespace kartya01
             ShowPlayTime();
             listReactionTimes = new List<long>();
             ShowReactonTimes(0,0);
-            UjKartyaHuzasa(); 
+            UjKartyaHuzasa();
+            top5FileName = "toplista.txt";
         }
 
         // játék végállapota
@@ -99,6 +103,11 @@ namespace kartya01
                 listTop5Score.Sort();
                 listTop5Score.RemoveAt(0);
             }
+
+            // top 5 lista mentése
+            var fs = new FileStream(top5FileName, FileMode.Create);
+            var szovegesito = new XmlSerializer(typeof(List<long>));
+            szovegesito.Serialize(fs, listTop5Score);
 
             ListBoxTop5.ItemsSource = new ObservableCollection<long>(listTop5Score.OrderByDescending(x => x));
 
