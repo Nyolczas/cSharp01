@@ -3,5 +3,12 @@
     ViewBag.Title = "FeladatLista";
 }
 
-<h2>Feladat Lista</h2>
+<h2 class="jumbotron">Feladatok Listája</h2>
+
+<ul>
+    @foreach (var item in @ViewBag.Lista)
+    {
+        <li>@item</li>
+    }
+</ul>
 

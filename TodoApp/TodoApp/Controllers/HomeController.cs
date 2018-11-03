@@ -38,7 +38,7 @@ namespace TodoApp.Controllers
             Lista.Add("jogosítvány megszerzése");
             Lista.Add("vállalkozói karrier építése");
 
-            
+            ViewBag.Lista = Lista;
 
             return View();
         }
