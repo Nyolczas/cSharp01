@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using TodoApp.Models;
 
 namespace TodoApp.Controllers
 {
@@ -30,17 +31,15 @@ namespace TodoApp.Controllers
         public ActionResult FeladatLista()
         {
             // feladat lista 
-            var Lista = new List<string>();
+            var Lista = new List<CelFeladat>();
 
-            Lista.Add("anyagi biztonság");
-            Lista.Add("anyagi függetlenség");
-            Lista.Add("házépítés");
-            Lista.Add("jogosítvány megszerzése");
-            Lista.Add("vállalkozói karrier építése");
+            Lista.Add(new CelFeladat() { name = "anyagi biztonság", done = false });
+            Lista.Add(new CelFeladat() { name = "anyagi függetlenség", done = false });
+            Lista.Add(new CelFeladat() { name = "házépítés", done = false });
+            Lista.Add(new CelFeladat() { name = "jogosítvány megszerzése", done = false });
+            Lista.Add(new CelFeladat() { name = "vállalkozói karrier építése", done = false });
 
-            ViewBag.Lista = Lista;
-
-            return View();
+            return View(Lista);
         }
     }
 }
