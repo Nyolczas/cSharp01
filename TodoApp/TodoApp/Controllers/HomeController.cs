@@ -33,7 +33,7 @@ namespace TodoApp.Controllers
             // feladat lista 
             var Lista = new List<CelFeladat>();
 
-            Lista.Add(new CelFeladat() { name = "anyagi biztonság", done = false });
+            Lista.Add(new CelFeladat() { name = "anyagi biztonság", done = true });
             Lista.Add(new CelFeladat() { name = "anyagi függetlenség", done = false });
             Lista.Add(new CelFeladat() { name = "házépítés", done = false });
             Lista.Add(new CelFeladat() { name = "jogosítvány megszerzése", done = false });
