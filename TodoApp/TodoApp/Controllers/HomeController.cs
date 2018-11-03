@@ -26,5 +26,21 @@ namespace TodoApp.Controllers
 
             return View();
         }
+
+        public ActionResult FeladatLista()
+        {
+            // feladat lista 
+            var Lista = new List<string>();
+
+            Lista.Add("anyagi biztonság");
+            Lista.Add("anyagi függetlenség");
+            Lista.Add("házépítés");
+            Lista.Add("jogosítvány megszerzése");
+            Lista.Add("vállalkozói karrier építése");
+
+            
+
+            return View();
+        }
     }
 }
