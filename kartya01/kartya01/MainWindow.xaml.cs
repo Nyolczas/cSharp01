@@ -96,8 +96,7 @@ namespace kartya01
             ShowPlayTime();
             listReactionTimes = new List<long>();
             ShowReactonTimes(0,0);
-            UjKartyaHuzasa();
-            
+            UjKartyaHuzasa();            
         }
 
         // játék végállapota
