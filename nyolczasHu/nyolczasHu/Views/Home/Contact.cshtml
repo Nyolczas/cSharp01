@@ -1,17 +1,48 @@
 ﻿@{
-    ViewBag.Title = "Contact";
+    ViewBag.Title = "Kapcsolat";
 }
-<h2>@ViewBag.Title.</h2>
+
+@model nyolczasHu.Models.gmail
+
+@*@{ 
+    Layout = null;
+}*@
+
+
+<h2>@ViewBag.Title</h2>
 <h3>@ViewBag.Message</h3>
 
-<address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
-    425.555.0100
-</address>
+<div>
+    @using (Html.BeginForm("Contact", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+            <table>
+                <tr>
+                    <td>To:</td>
+                    <td>@Html.TextBoxFor(model=>model.To)</td>
+                </tr>
+                <tr>
+                    <td>Subject:</td>
+                    <td>@Html.TextBoxFor(model => model.Subject)</td>
+                </tr>
+                <tr>
+                    <td>Body:</td>
+                    <td>@Html.TextAreaFor(model => model.Body, new { rows="15", cols="25"})</td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="submit" value="Küldés" />
+                    </td>
+                </tr>
+            </table>
+            <span style="color:green">@ViewBag.Message</span>
+    }
+</div>
 
 <address>
-    <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
+    1132 Budapest<br />
+    Váci út 56-58. 3. 65.<br />
+    tel: +36 70 325 8987
+    @* todo: megnézni hogy kell rendesen megcsinálni a telefonos linket*@
+
+
 </address>
