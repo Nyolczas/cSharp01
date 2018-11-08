@@ -16,15 +16,23 @@ namespace TodoApp.Controllers
             return View(MyDb.Lista);
         }
 
-        public ActionResult Create(string ujCel)
+        [HttpGet] // A routing csak a get kérések esetén irányít ide.
+        public ActionResult Create()
         {
-            // ha visszatér valamilyen értékkel,
-            if(!string.IsNullOrEmpty(ujCel))
+            return View();
+        }
+
+        [HttpPost] // A routing csak a post kérések esetén irányít ide.
+        public ActionResult Create(string name, bool isDone)
+        {
+            // ha visszatér valamilyen értékkel,...
+            if(!string.IsNullOrEmpty(name))
             {
-                // Akkor hozzáadjuk a listánkhoz az új tartalmat.
-                MyDb.Lista.Add(new CelFeladat() { name = ujCel, done = true });
+                // ...akkor hozzáadjuk a listánkhoz az új tartalmat.
+                MyDb.Lista.Add(new CelFeladat() { name = name, done = isDone });
                 return RedirectToAction("Index");
             }
+            // todo: itt jelezni kell a kliensnek, hogy nem adott meg semmit!
             return View();
         }
     }
