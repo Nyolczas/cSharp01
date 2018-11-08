@@ -154,9 +154,7 @@ namespace kartya01
                 Score -= 100;
             }
             LabelScore.Content = Score;
-        }
-
-        
+        } 
 
         private void VisszajelzesEltuntetese()
         {
