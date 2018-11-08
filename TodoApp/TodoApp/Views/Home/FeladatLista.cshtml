@@ -1,0 +1,43 @@
+﻿@model List<TodoApp.Models.CelFeladat>
+
+@{
+    ViewBag.Title = "FeladatLista";
+}
+
+<h2 class="jumbotron">Feladatok Listája</h2>
+
+<ul>
+    @foreach (var CelFeladat in Model)
+    {
+        if (CelFeladat.done)
+        {
+            <li class="alert-success">@CelFeladat.name</li>
+        }
+        else
+        {
+            <li class="alert-danger">@CelFeladat.name</li>
+        }
+
+    }
+</ul>
+
+<p>
+    <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+        Link with href
+    </a>
+</p>
+<div class="collapse" id="collapseExample">
+    <div class="card card-body">
+        <p>
+            <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample2">
+                Link with href
+            </a>
+        </p>
+        <div class="collapse" id="collapseExample2">
+            <div class="card card-body">
+                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+            </div>
+        </div>
+    </div>
+</div>
+

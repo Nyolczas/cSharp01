@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,6 +16,8 @@ using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
+using System.Xml.Serialization;
 using FontAwesome.WPF;
 
 namespace kartya01
@@ -24,22 +28,29 @@ namespace kartya01
     public partial class MainWindow : Window
     {
         private FontAwesomeIcon elozoKartya;
-        private int Score;
+        private long score;
+        private DispatcherTimer pendulumClock;
+        private TimeSpan playTime;
+        private Stopwatch stopwatch;
+        private List<long> listReactionTimes;
+        private Random dobokocka;
+        private FontAwesomeIcon[] kartyapakli;
+        private List<long> listTop5Score;
+        private string top5FileName;
 
         public MainWindow()
         {
             InitializeComponent();
-            UjKartyaHuzasa();
-            ButtonYes.IsEnabled = false; 
-            ButtonNo.IsEnabled = false;
-            Score = 0;
-        }
 
+            pendulumClock = new DispatcherTimer(TimeSpan.FromSeconds(1),
+                                                DispatcherPriority.Normal,
+                                                clockShock,
+                                                Application.Current.Dispatcher);
+            pendulumClock.Stop();
 
+            stopwatch = new Stopwatch();
 
-        private void UjKartyaHuzasa()
-        {
-            var kartyapakli = new FontAwesomeIcon[6];
+            kartyapakli = new FontAwesomeIcon[6];
 
             kartyapakli[0] = FontAwesomeIcon.Info;
             kartyapakli[1] = FontAwesomeIcon.Random;
@@ -48,8 +59,96 @@ namespace kartya01
             kartyapakli[4] = FontAwesomeIcon.Star;
             kartyapakli[5] = FontAwesomeIcon.Female;
 
-            var dobokocka = new Random();
+            dobokocka = new Random();
 
+            top5FileName = "toplista.txt";
+
+            StartingState();
+
+            if (File.Exists(top5FileName))
+            {
+                var fs = new FileStream(top5FileName, FileMode.Open);
+                var szovegesito = new XmlSerializer(typeof(List<long>));
+
+                listTop5Score = (List<long>)szovegesito.Deserialize(fs);
+            }
+            else
+            {
+                listTop5Score = new List<long>();
+            }
+
+            ShowTop5Data();
+            
+        }
+
+        // játék mkezdőállapota
+        private void StartingState()
+        {
+            ButtonRestart.Visibility = Visibility.Hidden;
+            ButtonStart.Visibility = Visibility.Visible;
+
+            ButtonStart.IsEnabled = true;
+            ButtonYes.IsEnabled = false;
+            ButtonNo.IsEnabled = false;
+            score = 0;
+            ShowScore();
+            playTime = TimeSpan.FromSeconds(10);
+            ShowPlayTime();
+            listReactionTimes = new List<long>();
+            ShowReactonTimes(0,0);
+            UjKartyaHuzasa();            
+        }
+
+        // játék végállapota
+        private void FinalState()
+        {
+            pendulumClock.Stop();
+
+            ButtonYes.IsEnabled = false;
+            ButtonNo.IsEnabled = false;
+
+            ButtonRestart.Visibility = Visibility.Visible;
+            ButtonStart.Visibility = Visibility.Hidden;
+
+            listTop5Score.Add(score);
+
+            if (listTop5Score.Count > 5)
+            {
+                listTop5Score.Sort();
+                listTop5Score.RemoveAt(0);
+            }
+
+            // top 5 lista mentése
+            var fs = new FileStream(top5FileName, FileMode.Create);
+            var szovegesito = new XmlSerializer(typeof(List<long>));
+            szovegesito.Serialize(fs, listTop5Score);
+            ShowTop5Data();
+
+        }
+
+        private void ShowTop5Data()
+        {
+            ListBoxTop5.ItemsSource = new ObservableCollection<long>(listTop5Score.OrderByDescending(x => x));
+        }
+
+        private void clockShock(object sender, EventArgs e)
+        {
+            playTime -= TimeSpan.FromSeconds(1);
+
+            if (playTime == TimeSpan.FromSeconds(0))
+            {
+                FinalState();
+            }
+            ShowPlayTime();
+        }
+
+        private void ShowPlayTime()
+        {
+            LabelPlayTime.Content = $"{playTime.Minutes:00}:{playTime.Seconds:00}";
+        }
+
+        private void UjKartyaHuzasa()
+        {
             var dobas = dobokocka.Next(0, 5);
 
             elozoKartya = cardRight.Icon;
@@ -66,11 +165,18 @@ namespace kartya01
             var animIn = new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(100));
             cardRight.BeginAnimation(OpacityProperty, animIn);
 
+            stopwatch.Restart();
+
         }
 
         private void ButtonStart_Click(object sender, RoutedEventArgs e)
         {
             StartGame();
+        }
+
+        private void ButtonRestart_Click(object sender, RoutedEventArgs e)
+        {
+            StartingState();
         }
 
         private void ButtonYes_Click(object sender, RoutedEventArgs e)
@@ -123,6 +229,7 @@ namespace kartya01
             ButtonYes.IsEnabled = true;
             ButtonNo.IsEnabled = true;
             ButtonStart.IsEnabled = false;
+            pendulumClock.Start();
         }
 
         private void RosszValasz()
@@ -145,16 +252,39 @@ namespace kartya01
 
         private void Scoring(bool isGoodAnsver)
         {
-            if(isGoodAnsver)
+            //stopwatch.Stop();
+
+            listReactionTimes.Add(stopwatch.ElapsedMilliseconds);
+            ShowReactonTimes(listReactionTimes.Last(), (long)listReactionTimes.Average());
+
+            if (isGoodAnsver)
             {
-                Score += 100;
+                Debug.WriteLine($"hozzáadott ponszám: {10000 / listReactionTimes.Last()}");
+                score = score + 10000 / listReactionTimes.Last();
             }
             else
             {
-                Score -= 100;
+                Debug.WriteLine($"levont ponszám: {100 * (listReactionTimes.Last() / 1000)}");
+                score = score - 100 * (listReactionTimes.Last() / 1000);
             }
+<<<<<<< HEAD
             LabelScore.Content = Score;
         } 
+=======
+
+            ShowScore();
+        }
+
+        private void ShowReactonTimes(long lastRactionTime, long averageReactionTime)
+        {
+            LabelReactionTime.Content = $"{lastRactionTime} / {averageReactionTime}";
+        }
+
+        private void ShowScore()
+        {
+            LabelScore.Content = score;
+        }
+>>>>>>> ed5781a4151979736b979fd11cdecf811f273b2f
 
         private void VisszajelzesEltuntetese()
         {
@@ -166,20 +296,32 @@ namespace kartya01
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
             Debug.WriteLine(e.Key);
-            if(e.Key==Key.Up)
+            if(ButtonStart.IsEnabled &&
+                ButtonStart.IsVisible &&
+                e.Key==Key.Up)
             {
                 StartGame();
             }
 
-            if(e.Key==Key.Right)
+            if (ButtonRestart.IsEnabled &&
+                ButtonRestart.IsVisible &&
+                e.Key == Key.Down)
+            {
+                StartingState();
+            }
+
+            if (ButtonNo.IsEnabled &&
+                e.Key==Key.Right)
             {
                 AnsverNo();
             }
 
-            if(e.Key==Key.Left)
+            if(ButtonYes.IsEnabled && 
+                e.Key==Key.Left)
             {
                 AnsverYes();
             }
         }
+
     }
 }

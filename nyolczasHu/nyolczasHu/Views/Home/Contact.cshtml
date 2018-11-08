@@ -1,0 +1,48 @@
+﻿@{
+    ViewBag.Title = "Kapcsolat";
+}
+
+@model nyolczasHu.Models.gmail
+
+@*@{ 
+    Layout = null;
+}*@
+
+
+<h2>@ViewBag.Title</h2>
+<h3>@ViewBag.Message</h3>
+
+<div>
+    @using (Html.BeginForm("Contact", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+            <table>
+                <tr>
+                    <td>To:</td>
+                    <td>@Html.TextBoxFor(model=>model.To)</td>
+                </tr>
+                <tr>
+                    <td>Subject:</td>
+                    <td>@Html.TextBoxFor(model => model.Subject)</td>
+                </tr>
+                <tr>
+                    <td>Body:</td>
+                    <td>@Html.TextAreaFor(model => model.Body, new { rows="15", cols="25"})</td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="submit" value="Küldés" />
+                    </td>
+                </tr>
+            </table>
+            <span style="color:green">@ViewBag.Message</span>
+    }
+</div>
+
+<address>
+    1132 Budapest<br />
+    Váci út 56-58. 3. 65.<br />
+    tel: +36 70 325 8987
+    @* todo: megnézni hogy kell rendesen megcsinálni a telefonos linket*@
+
+
+</address>

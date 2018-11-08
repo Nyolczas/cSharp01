@@ -34,13 +34,15 @@
             </Grid>
 
             <WrapPanel Margin="5" HorizontalAlignment="Center">
+                <Label Content="Idő"/>
+                <Label x:Name="LabelPlayTime" Content="00:00"/>
                 <Label Content="Pontszám"/>
-                <Label Content="px"
-                       x:Name="LabelScore"/>
+                <Label Content=""
+                       x:Name="LabelScore"
+                       Width="80"/>
                 <Label Content="Reakció idő"/>
-                <Label Content="rx"/>
-                <Label Content="Átlagos Reakció idő"/>
-                <Label Content="árx"/>
+                <Label x:Name="LabelReactionTime" Content="" Width="120"/>
+                
             </WrapPanel>
             <Button x:Name="ButtonYes" 
                     Grid.Row="2" Margin="5" Padding="10"
@@ -93,8 +95,27 @@
                     </StackPanel>
                 </Button.Content>
             </Button>
+            <Button x:Name="ButtonRestart"
+                    Grid.Row="2" Margin="5" Padding="10"
+                    HorizontalAlignment="Right" 
+                    Click="ButtonRestart_Click"
+                    Visibility="Hidden">
+                <Button.Content>
+                    <StackPanel Orientation="Horizontal">
+                        <fa:FontAwesome Icon="ArrowDown"
+                                        Margin="5"
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Center"
+                        />
+                        <TextBlock Text="Új játék"
+                                   HorizontalAlignment="Right"
+                                   VerticalAlignment="Center"
+                                   />
+                    </StackPanel>
+                </Button.Content>
+            </Button>
         </Grid>
-        <ListBox Width="120">
+        <ListBox x:Name="ListBoxTop5" Width="120">
 
         </ListBox>
     </Grid>
