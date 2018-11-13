@@ -38,10 +38,10 @@ namespace nyolczasHu.Controllers
 
             SmtpClient smtp = new SmtpClient();
             smtp.Host = "smtp.gmail.com";
-            smtp.Port = 465;
+            smtp.Port = 587;
             smtp.EnableSsl = true;
 
-            NetworkCredential nc = new NetworkCredential("nyolczas@gmail.com", "gmailpassword");
+            NetworkCredential nc = new NetworkCredential("nyolczas@gmail.com", "Internal");
             smtp.UseDefaultCredentials = true;
             smtp.Credentials = nc;
             smtp.Send(mm);

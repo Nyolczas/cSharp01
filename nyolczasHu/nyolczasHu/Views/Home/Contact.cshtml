@@ -12,31 +12,35 @@
 <h2>@ViewBag.Title</h2>
 <h3>@ViewBag.Message</h3>
 
-<div>
-    @using (Html.BeginForm("Contact", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
-    {
-            <table>
-                <tr>
-                    <td>To:</td>
-                    <td>@Html.TextBoxFor(model=>model.To)</td>
-                </tr>
-                <tr>
-                    <td>Subject:</td>
-                    <td>@Html.TextBoxFor(model => model.Subject)</td>
-                </tr>
-                <tr>
-                    <td>Body:</td>
-                    <td>@Html.TextAreaFor(model => model.Body, new { rows="15", cols="25"})</td>
-                </tr>
-                <tr>
-                    <td>
-                        <input type="submit" value="Küldés" />
-                    </td>
-                </tr>
-            </table>
+
+    <form id="form1" runat="server">
+        <table>
+            <tr>
+                <td>to:</td>
+                <td><asp:TextBox ID="to" runat="server"></asp:TextBox></td>
+            </tr>
+            <tr>
+                <td>from:</td>
+                <td><asp:TextBox ID="from" runat="server" Text="nyolczas@gmail.com"></asp:TextBox></td>
+            </tr>
+            <tr>
+                <td>subject:</td>
+                <td<asp:TextBox ID="subject" runat="server" Text="Teszt email"></asp:TextBox></td>
+            </tr>
+            <tr>
+                <td>body:</td>
+                <td><asp:TextBox ID="body" runat="server" Text="szöveg" TextMode="MultiLine"></asp:TextBox></td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="submit" value="Küldés" />
+                </td>
+            </tr>
+        </table>
+
+    </form>
             <span style="color:green">@ViewBag.Message</span>
-    }
-</div>
+
 
 <address>
     1132 Budapest<br />
