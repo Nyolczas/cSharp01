@@ -7,9 +7,11 @@
 <h2>Szerkesztés</h2>
 
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Edit","Todo",FormMethod.Post))
 {
     @Html.AntiForgeryToken()
+    @Html.EditorFor(x=>x.name)
+    @Html.EditorFor(x=>x.done)
     
     <div class="form-horizontal">
         <h4>CelFeladat</h4>

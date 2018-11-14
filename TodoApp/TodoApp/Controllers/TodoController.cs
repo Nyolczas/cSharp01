@@ -43,16 +43,20 @@ namespace TodoApp.Controllers
         /// <returns></returns>
 
         [HttpGet]
-        public ActionResult Edit( int Id)
+        public ActionResult Edit( int identity)
         {
             //MyDb.Lista.Where(x => x.id == id); // leszűröm az elemeket, amelyeknek id-jük van.
-            var item = MyDb.Lista.Single(x => x.id == Id); 
+            var item = MyDb.Lista.Single(x => x.id == identity); 
             return View();
         }
 
-        [HttpPut]
-        public ActionResult Edit(string name, bool isDone)
+        [HttpPost]
+        public ActionResult Edit(int id, string name, bool Done)
         {
+            var item = MyDb.Lista.Single(x => x.id == id);
+            item.name = name;
+            item.done = Done;
+
             return View();
         }
     }
