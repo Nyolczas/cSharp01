@@ -35,5 +35,25 @@ namespace TodoApp.Controllers
             // todo: itt jelezni kell a kliensnek, hogy nem adott meg semmit!
             return View();
         }
+
+        /// <summary>
+        ///  Az Action feladata az elem megjelenítése módosításra
+        ///  <param name="id"> a módosítandó tétel egyedi azonosítója</param>
+        /// </summary>
+        /// <returns></returns>
+
+        [HttpGet]
+        public ActionResult Edit( int Id)
+        {
+            //MyDb.Lista.Where(x => x.id == id); // leszűröm az elemeket, amelyeknek id-jük van.
+            var item = MyDb.Lista.Single(x => x.id == Id); 
+            return View();
+        }
+
+        [HttpPut]
+        public ActionResult Edit(string name, bool isDone)
+        {
+            return View();
+        }
     }
 }

@@ -7,6 +7,7 @@ namespace TodoApp.Models
 {
     public class CelFeladat
     {
+        public int id;
         public string name;
         public bool done;
     }
