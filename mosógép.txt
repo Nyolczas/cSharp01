@@ -1,0 +1,52 @@
+“A+++” energiaosztály 
+6. Érzék szenzorfunkció 
+7 kg (pamut) mosási kapacitás 
+1200 ford./perc centrifuga 
+Elektronikus vezérlés, 14 program 
+Nagyméretû, számjegyes/piktogramos kijelzõ, fehér karakterszín 
+“A” mosóhatás, “B” centrifuga hatékonyság 
+Állítható lábak
+
+Választható opciók: 
+Külön állítható hõmérséklet és centrifuga fordulatszám 
+Késleltetett programkezdési lehetõség 
+Clean+ és FreshCare+ funkció (utólagos dobforgatás) 
+Plusz öblítés választás 
+Elektronikus gombzár (gyermekzár) funkció 
+
+Fontosabb programok: 
+-napi vegyes
+
+-fehér
+
+-pamut
+
+-eco-pamut 
+-sportruha
+
+-paplan
+
+-farmerprogram 
+-mûszál
+
+-kényes anyag
+
+-gyapjúprogram 
+-színes 15°C-os mosás
+
+-30-perces gyorsprogram 
+-öblítés és centrifugálás
+
+-centrifuga+leeresztés 
+
+Mûszaki adatok: 
+Éves energiafogyasztás (kWh/év): 175
+Éves vízfogyasztás (liter/év): 10270
+Mosódob mérete (liter): 48
+Mosási zajszint (dBA): 63
+Centrifuga zajszint (dBA): 84
+Csatlakozási érték (W): 1850
+Nettó készüléktömeg (kg): 63,0
+Készülékméret (Mag.xSzél.xMély.) (mm): 837x595x435
+Bruttó készüléktömeg (kg): 64,3
+Csomagolt méretek (Mag.xSzél.xMély.) (mm): 888x645x510
